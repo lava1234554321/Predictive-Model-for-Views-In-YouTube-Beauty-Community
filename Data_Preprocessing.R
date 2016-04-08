@@ -260,6 +260,7 @@ mydata2$thanks  = as.factor(mydata2$thanks)
 mydata2$tagmakeup  = as.factor(mydata2$tagmakeup)
 mydata2$tagtutorial  = as.factor(mydata2$tagtutorial)
 mydata2$all_faces = mydata2$img0 + mydata2$img1 + mydata2$img2 + mydata2$img3
+mydata2$view_1000 = mydata2$views/(1000^2)
 
 ######################Saving File#########################
 save(mydata2, file = "data.Rda")
