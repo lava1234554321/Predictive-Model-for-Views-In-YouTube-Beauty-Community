@@ -64,17 +64,16 @@ python YoutubeComments2.py --videoid /Users/lavanyasunder1/node_sample0.csv > tm
 using the cut node samples from cut_node_sample_data.py. However, note that before you run the file you must authenticate (through your browser) and that this authentication will time out. In my experience, it timed out every 170 videos or so. This will cause the current process to stop running, and you may have to repeat a process and delete repeated output files. The output files will be in the format [videoID].txt. 
 
 ###Data Preprocessing 
-#####9. This file is called Data_Preprocessing.R in the repository. The file reads the main data file, comments, transcripts, and face detect results, and combines these into a data frame. It also replaces unicode emoji strings with their description (using emoji_table.txt, located in the repository), and adds a number of variables ot the data frame. The code processes the transcript, description box, and tags to add relevant variables to data set. Note: These relevant variables were created because of the sample I ran, and can be changed as needed.
-
+#####9. Data_Preprocessing.R
+This file is called Data_Preprocessing.R in the repository. The file reads the main data file, comments, transcripts, and face detect results, and combines these into a data frame. It also replaces unicode emoji strings with their description (using emoji_table.txt, located in the repository), and adds a number of variables ot the data frame. The code processes the transcript, description box, and tags to add relevant variables to data set. Note: These relevant variables were created because of the sample I ran, and can be changed as needed.
 The file also calculates the sentiment for the descripion box, title, transcript, and comments. The sentiment work, particulary for the comments, has a long run time (~45 minutes for 700+ videos). It utilizes the R package [parallel][mc], which uses multiple cores to run the comment sentiment work. Windows users will not be able to utilize parallel in such a way, and will have to edit that section. 
-
 The output is a formatted data frame, saved as "data.Rda" in the current R working directory. 
 
 
 
 ###Model Creation and Evaluation
-
-#####10. This file is called Model_Cross_Validation.R in the repository. The file inputs the data frame created by Data_Preprocessing.R,
+#####10. Model_Cross_Validation.R
+This file is called Model_Cross_Validation.R in the repository. The file inputs the data frame created by Data_Preprocessing.R,
 and performs K-fold cross validation on two models, Model A, which inludes all variables except likes, dislikes, average comment sentiment and standard deviation of average comment sentiment, and Model B, which includes all variables. Both models are run with a lasso regression and ridge regression, and the cross validated mean square error and standard deviation are calculated.
 
 [pyth]: https://realpython.com/blog/python/face-recognition-with-python/
