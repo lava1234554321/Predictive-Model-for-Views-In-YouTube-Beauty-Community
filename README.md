@@ -23,10 +23,16 @@ This step involve the node_sample.csv file, and will scrape the basic available 
 python Working_1.py -i <input file path> -o <output file path>
 ```
 
-###3. Cut node sample 
-This step involve the node_sample.csv file, and will scrape the basic available mundane and meta data from the sample of YouTube videos. Variables include likes, dislikes, tags, author, subscribers, etc. This command is fairly time expensive; for a sample size of 710 videos, the run time is around an hour. 
+###4. Cut node sample 
+This step (not necessary) will cut the node sample file into different "chunks" to allow you to run later programs synchronously. When used, it saves the input file into x number of output files where each output file has maximum 35 entries (currently only one column as it was created to work with node_sample.csv. 
 ```
-python Working_1.py -i <input file path> -o <output file path>
+python cut_node_sample_data.py -i <input file name>
+```
+###5. Download faces and use FaceDetect
+This command downloads the thumbnail images for all of the videos inputted (in format of node_sample.csv). It also requires the location of the haar cascade file (located in the repository) to run correctly. The output is a file named called face_detect_result.csv that has four columns, one for every image, with cells filled with the number of detected faces per image. Thanks to [Real Python][pyth] for direction on using OpenCV. 
+[pyth]: https://realpython.com/blog/python/face-recognition-with-python/
+```
+python face_detect.py -i /<input file>-p /<location of haar file>
 ```
 
 
