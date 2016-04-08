@@ -1,16 +1,16 @@
 #Predictive Model for Views In YouTube Beauty Community 
 
 ###Background
-This repository is for a Duke University Department of Statistics Honors thesis on the YouTube makeup community: "Predictive Model for Views in YouTube Beauty Community.pdf". The files availalbe are meant to enable users to sample makeup videos, scrape mundane and metadata, download thumbnails, perform face recognition on thumbnails, download auto-generated transcrips of the videos, download comments (through YouTube API), and finally, perform analysis on the resulting data set.
+This repository is for a Duke University Department of Statistics Honors thesis on the YouTube makeup community: "Predictive Model for Views in YouTube Beauty Community". The files available are meant to enable users to sample makeup videos, scrape mundane and metadata, download thumbnails, perform face recognition on thumbnails, download auto-generated transcripts of the videos, download comments (through YouTube API), and finally, perform analysis on the resulting data set.
 
 ###Data Collection 
 
 #####1. Starting link set (start_node.csv)
-The analysis starts with a user-generated starting link set. The entie project will refer to Youtube videoIDs, which are the unique ids for all YouTube videos, located in the URL. 
+The analysis starts with a user-generated starting link set. The entire project will refer to YouTube videoIDs, which are the unique ids for all YouTube videos, located in the URL. 
 ```
 Ex. For http://www.youtube.com/watch?v=9bZkp7q19f0, videoID = 9bZkp7q19f0
 ```
-To begin the analysis, the user should generate a list of starting make-up video "nodes". This file must be in a .csv format, contain only videoIds, and not contain headers. 
+To begin the analysis, the user should generate a list of starting make-up video "nodes". This file must be in a .csv format, contain only videoIDs, and not contain headers. 
 
 #####2. Snowball Sampling (node_sample.csv)
 Next, the user will run the snowball sampling file to sample additional makeup videos based on the starting set. Note: the user here will specify an input file (start_node.csv), an output file (node_sample.csv), and a depth for the snowball sampling. The depth used in the initial analysis was 3.
@@ -64,15 +64,15 @@ python YoutubeComments2.py --videoid /Users/lavanyasunder1/node_sample0.csv > tm
 using the cut node samples from cut_node_sample_data.py. However, note that before you run the file you must authenticate (through your browser) and that this authentication will time out. In my experience, it timed out every 170 videos or so. This will cause the current process to stop running, and you may have to repeat a process and delete repeated output files. The output files will be in the format [videoID].txt. 
 
 ###Data Preprocessing 
-This file is called Data_Preprocessing.R in the repository. The file reads the main data file, comments, transcripts, and face detect results, and combines these into a data frame. It also replaces unicode emoji strings with their description (using emoji_table.txt, located in the repository), and adds a number of variables ot the data frame. The code processes the transcript, description box, and tags to add relevant variables to data set. Note: These relevant variables were created because of the sample I ran, and can be changed as needed.
-The file also calculates the sentiment for the descripion box, title, transcript, and comments. The sentiment work, particulary for the comments, has a long run time (~45 minutes for 700+ videos). It utilizes the R package [parallel][mc], which uses multiple cores to run the comment sentiment work. Windows users will not be able to utilize parallel in such a way, and will have to edit that section. 
+This file is called Data_Preprocessing.R in the repository. The file reads the main data file, comments, transcripts, and face detect results, and combines these into a data frame. It also replaces unicode emoji strings with their description (using emoji_table.txt, located in the repository), and adds a number of variables to the data frame. The code processes the transcript, description box, and tags to add relevant variables to data set. Note: These relevant variables were created because of the sample I ran, and can be changed as needed.
+The file also calculates the sentiment for the description box, title, transcript, and comments. The sentiment work, particularly for the comments, has a long run time (~45 minutes for 700+ videos). It utilizes the R package [parallel][mc], which uses multiple cores to run the comment sentiment work. Windows users will not be able to utilize parallel in such a way, and will have to edit that section. 
 The output is a formatted data frame, saved as "data.Rda" in the current R working directory. 
 
 
 
 ###Model Creation and Evaluation
 This file is called Model_Cross_Validation.R in the repository. The file inputs the data frame created by Data_Preprocessing.R,
-and performs K-fold cross validation on two models, Model A, which inludes all variables except likes, dislikes, average comment sentiment and standard deviation of average comment sentiment, and Model B, which includes all variables. Both models are run with a lasso regression and ridge regression, and the cross validated mean square error and standard deviation are calculated.
+and performs K-fold cross validation on two models, Model A, which includes all variables except likes, dislikes, average comment sentiment and standard deviation of average comment sentiment, and Model B, which includes all variables. Both models are run with a lasso regression and ridge regression, and the cross validated mean square error and standard deviation are calculated.
 
 [pyth]: https://realpython.com/blog/python/face-recognition-with-python/
 [dl]: https://github.com/rg3/youtube-dl
