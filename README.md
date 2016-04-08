@@ -6,7 +6,7 @@ This repository is for a Duke University Department of Statistics Honors thesis 
 
 ###Data Collection 
 
-###1. Starting link set (start_node.csv)
+####1. Starting link set (start_node.csv)
 The analysis starts with a user-generated starting link set. The entie project will refer to Youtube videoIDs, which are the unique id vr all YouTube videos, located in the URL. 
 ```
 Ex. For http://www.youtube.com/watch?v=9bZkp7q19f0, videoID = 9bZkp7q19f0
@@ -26,7 +26,7 @@ python Working_1.py -i <input file path> -o <output file path>
 ```
 
 ###4. Cut node sample 
-This step (not necessary) will cut the node sample file into different "chunks" to allow you to run later programs synchronously. When used, it saves the input file into x number of output files where each output file has maximum 35 entries (currently only one column as it was created to work with node_sample.csv. The output files will be in the format <input file name><i>.csv, where i is the "ith" cut of the file. For instance, if your node_sample.csv file had 72 entries, the cut_node_sample_data.py file would create three files, node_sample0.csv, node_sample1.csv, and node_sample2.csv, with 35, 35, and 2 entries respectively. 
+This step (not necessary) will cut the node sample file into different "chunks" to allow you to run later programs synchronously. When used, it saves the input file into x number of output files where each output file has maximum 35 entries (currently only one column as it was created to work with node_sample.csv. The output files will be in the format <input file name><n>.csv, where n is the "nth" cut of the file. For instance, if your node_sample.csv file had 72 entries, the cut_node_sample_data.py file would create three files, node_sample0.csv, node_sample1.csv, and node_sample2.csv, with 35, 35, and 2 entries respectively. 
 ```
 python cut_node_sample_data.py -i <input file name>
 ```
